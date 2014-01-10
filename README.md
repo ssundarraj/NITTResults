@@ -1,0 +1,1 @@
+Python script to get all the results of a partiular class.
