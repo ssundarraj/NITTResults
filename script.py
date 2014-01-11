@@ -18,9 +18,31 @@ def latestSem(rno, driver):
 	elem.send_keys(rno)
 	elem.send_keys(Keys.RETURN)
 	el = driver.find_element_by_id('Dt1')
-	sem_id_value=0
+	sem_id_value_ini=0
 	for option in el.find_elements_by_tag_name('option'):
-		sem_id_value=option.get_attribute('value')
+		sem_id_value_ini=option.get_attribute('value')
+
+	elem = driver.find_element_by_name("TextBox1")
+	elem.send_keys(Keys.CONTROL, 'a')
+	elem.send_keys("\b")
+	elem.send_keys(int(rno)+1)
+	elem.send_keys(Keys.RETURN)
+	el = driver.find_element_by_id('Dt1')
+	sem_id_value_alt=0
+	for option in el.find_elements_by_tag_name('option'):
+		sem_id_value_alt=option.get_attribute('value')
+
+	elem = driver.find_element_by_name("TextBox1")
+	elem.send_keys(Keys.CONTROL, 'a')
+	elem.send_keys("\b")
+	elem.send_keys(int(rno)+2)
+	elem.send_keys(Keys.RETURN)
+	el = driver.find_element_by_id('Dt1')
+	sem_id_value_alt1=0
+	for option in el.find_elements_by_tag_name('option'):
+		sem_id_value_alt1=option.get_attribute('value')
+
+	sem_id_value=min(sem_id_value_ini, sem_id_value_alt, sem_id_value_alt1)
 	return sem_id_value
 
 def getGPA(rno, sem_id_value):
@@ -46,10 +68,10 @@ if __name__=="__main__":
 	if(end_rno==0):
 		getGPA(start_rno, latestSem(rno, driver))
 	else:
-		sem_id_value=latestSem(start_rno, driver)
+		sem_id=latestSem(start_rno, driver)
 		for i in range(int(end_rno) - int(start_rno)+1):
 			try:
-				getGPA(int(start_rno)+i, sem_id_value)
+				getGPA(int(start_rno)+i, sem_id)
 			except:
 				pass
 	closeDriver(driver)
