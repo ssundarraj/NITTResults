@@ -17,7 +17,6 @@ def latestSem(rno, driver):
 	elem.send_keys("\b")
 	elem.send_keys(rno)
 	elem.send_keys(Keys.RETURN)
-
 	el = driver.find_element_by_id('Dt1')
 	sem_id_value=0
 	for option in el.find_elements_by_tag_name('option'):
@@ -30,12 +29,10 @@ def getGPA(rno, sem_id_value):
 	elem.send_keys("\b")
 	elem.send_keys(rno)
 	elem.send_keys(Keys.RETURN)
-
 	el = driver.find_element_by_id('Dt1')
 	for option in el.find_elements_by_tag_name('option'):
 		if option.get_attribute('value')==sem_id_value:
 			option.click()
-
 	name=driver.find_element_by_id('LblName').text
 	gpa=driver.find_element_by_id('LblGPA').text
 	print str(rno) + "\t" + name + "\t" +  gpa
@@ -49,7 +46,6 @@ if __name__=="__main__":
 	if(end_rno==0):
 		getGPA(start_rno, latestSem(rno, driver))
 	else:
-
 		sem_id_value=latestSem(start_rno, driver)
 		for i in range(int(end_rno) - int(start_rno)+1):
 			try:

@@ -8,6 +8,3 @@ Firefox
 Usage:
 
 $ python script.py initial_roll_no final_roll_no
-
-Example
-python script.py 106112091 106112107
