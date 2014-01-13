@@ -64,7 +64,10 @@ if __name__=="__main__":
 	driver = setDriver()
 	start_rno=sys.argv[1]
 	end_rno=0
-	end_rno=sys.argv[2]
+	try:
+		end_rno=sys.argv[2]
+	except:
+		pass
 	if(end_rno==0):
 		getGPA(start_rno, latestSem(rno, driver))
 	else:
